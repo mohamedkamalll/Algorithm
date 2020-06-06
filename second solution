@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+   int n ; //number of slices
+
+
+    printf("please enter the number of travellers ");
+    scanf("%d",&n);
+
+    int size[n];
+    int travellersnumberandti[2][n];
+    //travellersnumberandti[0][ith] //travellersnumberandti[1][ti]
+
+   for(int counter=0;counter<n;counter++){
+        printf("please enter the smallest size of traveller number %d ",counter+1);
+        travellersnumberandti[0][counter]=counter+1;
+        scanf("%d",&travellersnumberandti[1][counter]);
+    }
+
+
+    for(int counter1=0;counter1<n;counter1++){
+        printf("please enter the size number %d ",(counter1+1) );
+        scanf("%d",&size[counter1]);
+    }
+
+
+
+    for(int i=0;i<n;i++){
+            int lower=size[i];
+        for(int m =i ; m<n ; m++){
+
+            if(travellersnumberandti[1][i]==size[m])
+            {
+                size[i] = size[m];
+                size[m] = lower;
+                break;
+
+            }
+
+            else if(travellersnumberandti[1][i]<size[m])
+            {
+                    if(size[m]<size[i]){
+                       size[i]= size[i]-size[m];
+                       size[m]= size[m]+size[i];
+                       size[i]=size[m]-size[i];
+
+                    }
+
+            }
+
+        }
+
+    }
+
+
+    for(int i=0; i<n; i++){
+        if(travellersnumberandti[1][i]<= size[i])
+            printf("the traveller number %d is happy , his minimum size is %d and he will take %d \n",travellersnumberandti[0][i],travellersnumberandti[1][i],size[i]);
+        else
+            printf("the traveller number %d is unhappy , his minimum size is %d and he will take %d \n",travellersnumberandti[0][i],travellersnumberandti[1][i],size[i]);
+    }
+
+
+    return 0;
+}

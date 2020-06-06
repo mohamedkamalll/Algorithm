@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int n ; //number of slices
+    printf("please enter the number of travellers ");
+    scanf("%d",&n);
+
+    int size[n];
+    int travellersnumberandti[2][n];
+    //travellersnumberandti[0][ith] //travellersnumberandti[1][ti]
+
+   for(int counter=0;counter<n;counter++){
+        printf("please enter the smallest size of traveller number %d ",counter+1);
+        travellersnumberandti[0][counter]=counter+1;
+        scanf("%d",&travellersnumberandti[1][counter]);
+    }
+
+
+    for(int counter1=0;counter1<n;counter1++){
+        printf("please enter the size number %d ",(counter1+1) );
+        scanf("%d",&size[counter1]);
+    }
+
+
+    for(int i=0;i<n;i++){
+            for(int m=0 ; m<n-1 ; m++){ //bubble sort
+                if(travellersnumberandti[1][m+1]<travellersnumberandti[1][m])
+                {
+
+                    travellersnumberandti[0][m+1]=travellersnumberandti[0][m+1]-travellersnumberandti[0][m];
+                    travellersnumberandti[0][m]=travellersnumberandti[0][m]+travellersnumberandti[0][m+1];
+                    travellersnumberandti[0][m+1]= travellersnumberandti[0][m]-travellersnumberandti[0][m+1];
+
+                    travellersnumberandti[1][m+1]=travellersnumberandti[1][m+1]-travellersnumberandti[1][m];
+                    travellersnumberandti[1][m]=travellersnumberandti[1][m]+travellersnumberandti[1][m+1];
+                    travellersnumberandti[1][m+1]= travellersnumberandti[1][m]-travellersnumberandti[1][m+1];
+
+                }
+                if(size[m+1]<size[m]){
+                    size[m+1]= size[m+1]-size[m];
+                    size[m]= size[m]+size[m+1];
+                    size[m+1]=size[m]-size[m+1];
+                }
+
+            }
+    }
+
+
+    for(int i=0; i<n; i++){
+        if(travellersnumberandti[1][i]<= size[i])
+            printf("the traveller number %d is happy , his minimum size is %d and he will take %d \n",travellersnumberandti[0][i],travellersnumberandti[1][i],size[i]);
+        else
+            printf("the traveller number %d is unhappy , his minimum size is %d and he will take %d \n",travellersnumberandti[0][i],travellersnumberandti[1][i],size[i]);
+
+
+    }
+    return 0;
+}
